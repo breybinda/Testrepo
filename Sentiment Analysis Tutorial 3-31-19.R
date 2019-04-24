@@ -28,8 +28,6 @@ get_sentiments("nrc")
 #USING PREP_DATA.R AS TEMPLATE
 library(readr)
 library(devtools)
-sensesensibility <- read_lines("http://www.gutenberg.org/cache/epub/161/pg161.txt", skip = 33)
-sensesensibility <- sensesensibility[1:(length(sensesensibility) - 370)]
 sensesensibility <- sensesensibility[!is.na(sensesensibility)]
 #
 #Look at what we loaded: a book
@@ -75,6 +73,9 @@ jane_austen_sentiment <- tidy_books %>%
   count(book, index = linenumber %/% 80, sentiment) %>%
   spread(sentiment, n, fill = 0) %>%
   mutate(sentiment = positive - negative)
+library(readr)
+library(devtools)
+sensesensibility <- sensesensibility[!is.na(sensesensibility)]
 
 #Plot
 library(ggplot2)
